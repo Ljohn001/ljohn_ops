@@ -1,4 +1,12 @@
 #!/bin/bash
+#
+#===============================
+# Description: 获取系统相关信息 
+# Author: Ljohn
+# Mail: ljohnmail@foxmail.com
+# Last Update: 2017.9.20
+# Version: 1.0
+#===============================
 system_info()
 {
    echo "====================system info========================"
