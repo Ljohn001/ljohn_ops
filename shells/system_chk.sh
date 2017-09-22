@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# Description: Auto test download & I/O speed script
-#
-# Copyright (C) 2015 - 2016 Teddysun <i@teddysun.com>
-#
-# Thanks: LookBack <admin@dwhd.org>
-#
-# URL: https://teddysun.com/444.html
-#
+#===============================
+# Description:  Auto test download & I/O & speed script
+# Author: Ljohn
+# Mail: ljohnmail@foxmail.com
+# Last Update: 2017.9.22
+# Version: 1.0
+#===============================
+
 
 if  [ ! -e '/usr/bin/wget' ]; then
     echo "Error: wget command not found. You must be install wget command at first."
