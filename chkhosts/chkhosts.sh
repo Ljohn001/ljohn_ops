@@ -1,6 +1,12 @@
 #!/bin/bash
 #
-
+#===============================
+# Description: Check hosts from filelist
+# Author: Ljohn
+# Mail: ljohnmail@foxmail.com
+# Last Update: 2017.9.22
+# Version: 1.0
+#===============================
 start=`date +%s`
 HLIST=$(cat /server/scripts/ipadds.txt)
 uphosts=0
