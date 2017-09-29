@@ -44,8 +44,11 @@ network_info ()
 {
    echo "=====================network info======================="
    network_card=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" | awk '{print $NF}')
-   IP=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}') 
+   IP=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}')
+   MAC=$(cat /sys/class/net/$network_card/address) 
    echo "network: $network_card  address is  $IP"
+   echo " IP: $IP"
+   echo "MAC: $MAC"
 }
 
 
