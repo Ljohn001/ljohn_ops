@@ -26,7 +26,8 @@ Script_Version="2017.10.09"
 
 # define polling log path
 LOGPATH=/var/log/polling
-ipaddr=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}')
+card=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" | awk '{print $NF}'| sed -n 1p)
+ipaddr=$(ifconfig $card | head -2 | tail -1| cut -d: -f2|cut -d' ' -f1)
 [ -d $LOGPATH ] || mkdir -p $LOGPATH
 RESULTFILE="$LOGPATH/HostDailyCheck-$ipaddr-`hostname`-`date +%Y%m%d`.txt"
 
@@ -211,7 +212,7 @@ function getServiceStatus(){
         report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
         report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量
     else
-        conf=$(/sbin/chkconfig | grep -E ":on|:启用")
+        conf=$(/sbin/chkconfig --list| grep -E ":on|:启用")
         process=$(/sbin/service --status-all 2>/dev/null | grep -E "is running|正在运行")
         # report information
         report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
@@ -245,21 +246,23 @@ function getLoginStatus(){
 function getNetworkStatus(){
     echo ""
     echo "############################ Check Network ############################"
-#    if [[ $OS_Version < 7 ]];then
-#        /sbin/ifconfig -a | grep -v packets | grep -v collisions | grep -v inet6
-#    else
-#        #ip address
-#        for i in $(ip link | grep BROADCAST | awk -F: '{print $2}');do ip add show $i | grep -E "BROADCAST|global"| awk '{print $2}' | tr '\n' ' ' ;echo "" ;done  
-#    fi
-    DEVICE=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" | awk '{print $NF}')
-    IP=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}')
-    MAC=$(cat /sys/class/net/$DEVICE/address)
-    GATEWAY=$(ip route | grep default | awk '{print $3}')
-    DNS=$(grep nameserver /etc/resolv.conf| grep -v "#" | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')
-    echo "     IP: $IP"
-    echo "    MAC: $MAC"
-    echo "Gateway: $GATEWAY"
-    echo "    DNS: $DNS"
+   DEVICE=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" | awk '{print $NF}')
+   IP=$(ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}'|tr '\n' ',' | sed 's/,$//')
+   if [[ `ip addr |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}'|wc -l` < 2  ]];then
+      MAC=$(cat /sys/class/net/$DEVICE/address)
+      echo "    MAC: $MAC"
+     else
+       for ips in $DEVICE;
+         do
+            MAC=$(cat /sys/class/net/$ips/address)
+            echo "    MAC: $MAC";
+       done
+   fi
+   GATEWAY=$(ip route | grep default | awk '{print $3}')
+   DNS=$(grep nameserver /etc/resolv.conf| grep -v "#" | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')
+   echo "     IP: $IP"
+   echo "Gateway: $GATEWAY"
+   echo "    DNS: $DNS"
     # report information
 #    IP=$(ip -f inet addr | grep -v 127.0.0.1 |  grep inet | awk '{print $NF,$2}' | tr '\n' ',' | sed 's/,$//')
 #    MAC=$(ip link | grep -v "LOOPBACK\|loopback" | awk '{print $2}' | sed 'N;s/\n//' | tr '\n' ',' | sed 's/,$//')

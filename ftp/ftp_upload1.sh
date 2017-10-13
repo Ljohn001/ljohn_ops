@@ -20,20 +20,20 @@ LOGFILE="/var/log/ftp_upload.log"
 
 # FTP server
 # Enter the Hostname or IP address below
-FTP_HOST=""
+FTP_HOST="192.168.1.99"
 
 # FTP username
 # Enter the FTP username below
-FTP_USER=""
+FTP_USER="ljohn1"
 
 # FTP password
 # Enter the username's password below
-FTP_PASS=""
+FTP_PASS="ljohn"
 
 # FTP server remote folder
 # Enter the FTP remote folder below
 # For example: public_html
-FTP_DIR=""
+FTP_DIR="/"
 
 ########## END OF CONFIG ##########
 
