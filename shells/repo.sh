@@ -78,4 +78,5 @@ EOF
     echo "CentOS5 yum repo is installed"
 else
     echo -e "\033[31m Do not support your OS!!\033[0m"
+    exit 1
 fi
