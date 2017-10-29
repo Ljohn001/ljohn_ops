@@ -3,12 +3,12 @@
 # Description:  centos6_init_shell
 # Author: Ljohn
 # Mail: ljohnmail@foxmail.com
-# Last Update: 2017年7月12日
-# Version: 1.0
+# Last Update: 2017.10.30
+# Version: 1.1
 #=================================================================
 cat << EOF
  +--------------------------------------------------------------+  
- |          === Welcome to  System init ===                     |  
+ |              === Welcome to  System init ===                 |  
  +--------------------------------------------------------------+  
 EOF
 #判断是否为root用，platform是否为X64
@@ -22,7 +22,7 @@ if [[ $platform != "x86_64" ||  $osversion != "CentOS" ]];then
     echo "Error this script is only for 64bit and CentOS Operating System !"
     exit 1
 fi
-    echo "the platform is ok"
+    echo "The platform is ok"
 
 #add hostname
 if [ "$1" == "" ];then
@@ -30,11 +30,11 @@ if [ "$1" == "" ];then
     exit 1
 else
         hostname  $1
-        hostname
+        echo "HostName is $1"
         sed -i "/HOSTNAME=/d" /etc/sysconfig/network
         echo "HOSTNAME=$1" >>/etc/sysconfig/network
 fi
-
+sleep 2
 
 DATE=`date +%Y_%m_%d:%H_%M_%S`  
 INIT_LOG="system_init_$DATE.log"  
@@ -104,9 +104,26 @@ echo "$DATE [4.sysctl_config] is [success]" >>/root/${INIT_LOG}
 #5.history_config  
 #调整HISTSIZE大小，默认为1000
 history_config(){
-echo "export HISTSIZE=2000" >> /etc/profile  
-source /etc/profile  
-echo "$DATE [5.history_config] is [success]" >>/root/${INIT_LOG}  
+if [ ! -f "/etc/profile.d/ljohn.sh" ];then
+cat >/etc/profile.d/ljohn.sh << EOF
+HISTSIZE=10000
+PS1="\[\e[32;1m\][\u@\h \W]\\$\[\e[0m\]"
+HISTTIMEFORMAT="%F %T $(whoami) "
+
+alias l='ls -AFhlt'
+alias lh='l | head'
+alias vi=vim
+
+GREP_OPTIONS="--color=auto"
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias fgrep='fgrep --color'
+EOF
+   chmod 644 /etc/profile.d/ljohn.sh
+else 
+   echo "history_config is configed"
+fi
+   echo "$DATE [5.history_config] is [success]" >>/root/${INIT_LOG}  
 }
 
 #6.pass_length and login count limit  
@@ -247,10 +264,9 @@ main
 sleep 1
 
 cat << EOF
-+-------------------------------------------------+
-|             System init Finished                |
-|          Commond restart this server !          |
-+-------------------------------------------------+
+ +--------------------------------------------------------------+  
+ |                === System init Finished ===                  |  
+ +--------------------------------------------------------------+  
 EOF
 sleep 1
 #重启系统
@@ -258,16 +274,16 @@ read -p "Do you want to reboot the system?(yes|no)" want
                     case $want in  
   
                                  yes)  
-                                 echo "reboot now!"  
+                                 echo "Reboot now!"  
                                  reboot  
                                  ;;  
   
                                  no)  
-                                 echo "init over!"  
+                                 echo "Centos6 init is ok! please enjoy it!"  
                                  ;;  
   
                                  *)  
-                                 echo "please useage yes or no! thanks"  
+                                 echo 'Please useage "yes" or "no"! thanks'  
                                  ;;  
   
                     esac 
