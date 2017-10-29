@@ -3,7 +3,7 @@
 ***使用说明:***
 ```bash
 下载:
-curl -s https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/centos6-init/centos6_init.sh
+curl -s https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/centos6_init.sh
 也可以使用wget命令
 chmod +x centos6_init_shell.sh
 ./centos6_init_shell.sh node1
