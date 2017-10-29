@@ -1,15 +1,42 @@
 #!/bin/bash
 #
 #
-
-if [[ "$(whoami)" != "root" ]]; then
-  
-    echo "please run this script as root ." >&2
+#=================================================================
+# Description:  centos7_init_shell
+# Author: Ljohn
+# Mail: ljohnmail@foxmail.com
+# Last Update: 2017.10.30
+# Version: 1.1
+#=================================================================
+cat << EOF
+ +--------------------------------------------------------------+  
+ |              === Welcome to  System init ===                 |  
+ +--------------------------------------------------------------+  
+EOF
+#判断是否为root用，platform是否为X64
+if  [ $(id -u) -gt 0 ]; then
+    echo "please use root run the script!"
     exit 1
 fi
-  
-echo -e "\033[31m 这个是centos7系统初始化脚本，请慎重运行！Please continue to enter or ctrl+C to cancel \033[0m"
-sleep 5
+platform=`uname -i`
+osversion=`cat /etc/redhat-release | awk '{print $1}'`
+if [[ $platform != "x86_64" ||  $osversion != "CentOS" ]];then
+    echo "Error this script is only for 64bit and CentOS Operating System !"
+    exit 1
+fi
+    echo "The platform is ok"
+
+#add hostname
+if [ "$1" == "" ];then
+    echo "The host name is empty."
+    exit 1
+else
+        hostname  $1
+        echo "HostName is $1"
+        sed -i "/HOSTNAME=/d" /etc/sysconfig/network
+        echo "HOSTNAME=$1" >>/etc/sysconfig/network
+fi
+sleep 3
 
 #configure yum source
 yum_config(){
@@ -96,3 +123,11 @@ main(){
     sysctl_config
 }
 main
+
+cat << EOF
+ +--------------------------------------------------------------+  
+ |                === System init Finished ===                  |  
+ +--------------------------------------------------------------+  
+EOF
+sleep 3
+echo "Please reboot your system!"

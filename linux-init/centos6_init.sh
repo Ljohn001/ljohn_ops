@@ -148,7 +148,7 @@ ntp_config(){
 ntp_config_count=`crontab -l | grep ntpdate|wc -l`  
 if [ ${ntp_config_count} -eq 0 ];then  
 cat<<EOF >>/var/spool/cron/root  
-00 01 * * * /usr/sbin/ntpdate -u ntp.api.bz >/dev/null 2>&1 
+0 1 * * * /usr/sbin/ntpdate -u ntp.api.bz >/dev/null 2>&1 
 EOF
 fi
 if [ $? = 0 ];then
@@ -261,14 +261,12 @@ small_fun
 }
 main
 
-sleep 1
-
 cat << EOF
  +--------------------------------------------------------------+  
  |                === System init Finished ===                  |  
  +--------------------------------------------------------------+  
 EOF
-sleep 1
+sleep 3 
 #重启系统
 read -p "Do you want to reboot the system?(yes|no)" want  
                     case $want in  
