@@ -120,6 +120,7 @@ alias egrep='egrep --color'
 alias fgrep='fgrep --color'
 EOF
    chmod 644 /etc/profile.d/ljohn.sh
+   source /etc/profile.d/ljohn.sh
 else 
    echo "history_config is configed"
 fi
@@ -232,15 +233,6 @@ if [ $? -eq 0 ];then
 fi
 }
 
-#16.small function
-#额外小功能
-small_fun(){
-echo 'PS1="\[\e[32;1m\][\u@\h \W]\\$\[\e[0m\]"'  >>/etc/bashrc
-if [ $? -eq 0 ];then
-    echo "$DATE [16.small function] is [success]" >>/root/${INIT_LOG}
-fi
-}
-
 main(){
 add_users_config
 sudoer_config
@@ -257,7 +249,6 @@ disable_service_config
 dns_config
 sshd_config
 yum_config
-small_fun
 }
 main
 
