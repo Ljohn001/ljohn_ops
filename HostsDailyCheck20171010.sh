@@ -768,6 +768,3 @@ function check(){
 check > $RESULTFILE
 echo "Check the result：$RESULTFILE"
 
-# Clearlog in /var/log/polling
-find /var/log/polling -type f -ctime +7 | xargs rm -rf 
-
