@@ -4,7 +4,7 @@
 # Arch: CentOS/RHEL 6/7
 # Author: Ljohn
 # Mail: ljohnmail@foxmail.com
-# Last Update: 2017.10.09
+# Last Update: 2017.10.10
 # Version: 1.1
 ###################################################################
 
@@ -21,7 +21,7 @@ source /etc/profile
 OS_Version=$(awk '{print $(NF-1)}' /etc/redhat-release)
 
 # declare script version date
-Script_Version="2017.10.09"
+Script_Version="2017.10.10"
 
 
 # define polling log path
@@ -770,4 +770,3 @@ echo "Check the result：$RESULTFILE"
 
 # Clearlog in /var/log/polling
 find /var/log/polling -type f -ctime +7 | xargs rm -rf 
-
