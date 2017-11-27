@@ -97,4 +97,7 @@ Restart cobblerd and then run 'cobbler sync' to apply changes.
 ```
 
 #### 详细配置配置说明见我个人博客
+http://blog.51cto.com/ljohn/2045011
+
+
 
