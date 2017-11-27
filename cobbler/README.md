@@ -1,6 +1,9 @@
 ## 一键部署Cobbler服务器
 ### 简介
 Cobbler是红帽（RedHat）2008年发布的一款自动化操作系统部署的实现工具，由Python语言开发，是对PXE的二次封装。融合多种特性，提供了CLI和Web的管理形式。同时，Cobbler也提供了API接口，方便二次开发使用。它不仅可以安装物理机，同时也支持kvm、xen虚拟化、的安装。另外，它还能结合Puppet等集中化管理软件，实现自动化管理，同时还可以管理DHCP，DNS，以及yum包镜像。
+### 下载项目
+
+参照方法：https://github.com/Ljohn001/Ansible-roles/blob/master/README.md
 ### Cobbler安装部署
 1. 修改服务端IP，和DHCP IP
 ```
