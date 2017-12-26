@@ -33,7 +33,7 @@ EOF
 #ONBOOT=yes
 #EOF
 
-HOSTNAME=ops_ljohn$(echo $IPADDR|awk -F"." '{print $4}')
+HOSTNAME=ops_ljohn_$(echo $IPADDR|awk -F"." '{print $4}')
 
 cat >/etc/sysconfig/network<<EOF
 NETWORKING=yes

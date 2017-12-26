@@ -3,8 +3,8 @@
 # Description:  centos6_init_shell
 # Author: Ljohn
 # Mail: ljohnmail@foxmail.com
-# Last Update: 2017.10.30
-# Version: 1.1
+# Last Update: 2017.12.26
+# Version: 1.2
 #=================================================================
 cat << EOF
  +--------------------------------------------------------------+  
@@ -24,16 +24,23 @@ if [[ $platform != "x86_64" ||  $osversion != "CentOS" ]];then
 fi
     echo "The platform is ok"
 
-#add hostname
-if [ "$1" == "" ];then
+#0.set hostname
+set_hostname() {
+# 判断是否给脚本参数作为Hostname,参数为0跳出函数继续执行脚本，参数为1设置Hostname
+if [ $# -eq 0 ];then
     echo "The host name is empty."
-    exit 1
+    return 1
+elif [ $# -eq 1 ];then
+    echo "HostName is $1"
+    sed -i "/HOSTNAME=/d" /etc/sysconfig/network
+    echo "HOSTNAME=$1" >>/etc/sysconfig/network
 else
-        hostname  $1
-        echo "HostName is $1"
-        sed -i "/HOSTNAME=/d" /etc/sysconfig/network
-        echo "HOSTNAME=$1" >>/etc/sysconfig/network
+    echo "The parameter is invalid,Please input again and rerun it！"
+    exit 1
 fi
+}
+
+set_hostname $1
 sleep 2
 
 DATE=`date +%Y_%m_%d:%H_%M_%S`  
