@@ -8,16 +8,16 @@
 chk_url  |网站url 检查脚本         | 2017.12.26
 process-monitor | 进程监控脚本     | 2017.12.26
 cobbler  |Cobbler无人值守          | 2017.11.28
+polling  |轮询巡检脚本          |  2017.10.10
+shells   |常用小脚本集合          |  2017.10.28
 chkhosts |主机ping 检测脚本         | 2017.09.28
 disk     |自动磁盘分区scripts          | 2017.09.28
 ftp      |FTP Upload/Download          | 2017.09.28
 linux-init|linux 最小化安装初始化及服务器SysV Init scripts        | 2017.09.28
 lnmp     |lnmp scripts          |  2017.10.28
 network  |网络配置          |  2017.09.28
-polling  |轮询巡检脚本          |  2017.10.10
 redis    |redis 部署脚本          |  2017.09.28
-shells   |常用脚本集合          |  2017.10.28
-vpn      |openvpn/pptp scripts          |  2017.10.28| 
+vpn      |openvpn/pptp scripts          |  2017.9.25|
 #### 使用场景
 如何在运维重复的劳动中解脱出来？如何才能提高运维的效率？如何实现喝个茶时间，服务就能上线？
 ##### 举个栗子：
