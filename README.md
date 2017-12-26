@@ -6,6 +6,7 @@
 更新内容 |描述| 更新时间
 ---|---|---|
 chk_url  |网站url 检查脚本         | 2017.12.26
+process-monitor | 进程监控脚本     | 2017.12.26
 cobbler  |Cobbler无人值守          | 2017.11.28
 chkhosts |主机ping 检测脚本         | 2017.09.28
 disk     |自动磁盘分区scripts          | 2017.09.28
