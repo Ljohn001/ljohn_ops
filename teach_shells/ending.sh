@@ -7,7 +7,7 @@ cat << EOF
 EOF
 sleep 3
 #重启系统
-read -p "Do you want to reboot the system?(yes|no)" want
+read -p "Do you want to reboot the system?{yes|no}" want
                     case $want in
                                  yes)
                                  echo "Reboot now!"  
