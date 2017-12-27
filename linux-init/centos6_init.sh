@@ -267,15 +267,15 @@ EOF
 sleep 3 
 #重启系统
 Reboot(){
-read -p "Do you want to reboot the system? {yes or no}:" want
-if [ "$want" == "yes" ]; then
+read -p "Do you want to reboot the system? {yes or no}: " command 
+if [ "$command" == "yes" ]; then
    echo "Reboot now!"
    reboot
-elif [ "$want" == "no" ]; then
+elif [ "$command" == "no" ]; then
    echo "Centos6 init is ok! please enjoy it!"
    exit 0
 else
-   echo "Sorry, $want not recognized. Enter yes or no."
+   echo "Please input  yes or no! but,you can manual reboot it !!"
    exit 1
 fi
 }

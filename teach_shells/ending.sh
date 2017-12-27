@@ -5,21 +5,21 @@ cat << EOF
  |                === System init Finished ===                  |  
  +--------------------------------------------------------------+  
 EOF
-sleep 3
+#sleep 3
 #重启系统
-read -p "Do you want to reboot the system?{yes|y,no|n}" want
-case $want in
-yes|y)
+read -p "Do you want to reboot the system?{yes,no}: " command
+case $command in
+yes)
    echo "Reboot now!"  
-   reboot
+#   reboot
 ;;
 
-no|n)
+no)
    echo "Centos6 init is ok! please enjoy it!"  
 ;;
 
 *)
-   echo 'Please useage "yes|y" or "no|n"! thanks'  
+   echo 'Please useage "yes" or "no"! thanks'  
 ;;
 
 esac
