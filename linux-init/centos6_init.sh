@@ -266,6 +266,7 @@ cat << EOF
 EOF
 sleep 3 
 #重启系统
+Reboot(){
 read -p "Do you want to reboot the system? {yes or no}:" want
 if [ "$want" == "yes" ]; then
    echo "Reboot now!"
@@ -277,3 +278,6 @@ else
    echo "Sorry, $want not recognized. Enter yes or no."
    exit 1
 fi
+}
+Reboot
+

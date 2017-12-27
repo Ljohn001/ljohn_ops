@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+Reboot(){
 read -p "Do you want to reboot the system? {yes or no}:" want
 if [ "$want" == "yes" ]; then
    echo "Reboot now!"
@@ -10,3 +11,6 @@ else
   exit 1
 fi
 exit 0
+}
+Reboot
+
