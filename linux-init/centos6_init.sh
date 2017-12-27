@@ -114,7 +114,7 @@ history_config(){
 if [ ! -f "/etc/profile.d/ljohn.sh" ];then
 cat >/etc/profile.d/ljohn.sh << EOF
 HISTSIZE=10000
-PS1="\[\e[32;1m\][\u@\h \W]\\$\[\e[0m\]"
+PS1='\[\e[32;1m\][\u@\h \W]\\$\[\e[0m\]'
 HISTTIMEFORMAT="%F %T $(whoami) "
 
 alias l='ls -AFhlt'
@@ -266,18 +266,14 @@ cat << EOF
 EOF
 sleep 3 
 #重启系统
-read -p 'Do you want to reboot the system?(yes|no)' want
-                    case $want in
-                                 yes)
-                                 echo "Reboot now!"  
-                                 reboot  
-                                 ;;  
-  
-                                 no)
-                                 echo "Centos6 init is ok! please enjoy it!"
-                                 ;; 
-  
-                                 *)
-                                 echo 'Please useage "yes" or "no"! thanks'
-                                 ;;  
-                    esac 
+read -p "Do you want to reboot the system? {yes or no}:" want
+if [ "$want" == "yes" ]; then
+   echo "Reboot now!"
+   reboot
+elif [ "$want" == "no" ]; then
+   echo "Centos6 init is ok! please enjoy it!"
+   exit 0
+else
+   echo "Sorry, $want not recognized. Enter yes or no."
+   exit 1
+fi

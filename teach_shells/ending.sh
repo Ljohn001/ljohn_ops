@@ -7,19 +7,19 @@ cat << EOF
 EOF
 sleep 3
 #重启系统
-read -p "Do you want to reboot the system?{yes|no}" want
+read -p "Do you want to reboot the system?{yes|y,no|n}" want
 case $want in
-yes)
+yes|y)
    echo "Reboot now!"  
    reboot
 ;;
 
-no)
+no|n)
    echo "Centos6 init is ok! please enjoy it!"  
 ;;
 
 *)
-   echo 'Please useage "yes" or "no"! thanks'  
+   echo 'Please useage "yes|y" or "no|n"! thanks'  
 ;;
 
 esac
