@@ -12,5 +12,5 @@ else
 fi
 exit 0
 }
-Reboot
+Reboot $1
 
