@@ -5,9 +5,10 @@
 
 更新内容 |描述| 更新时间
 ---|---|---|
+mysql  |mysql备份及重设root用户密码| 2017.12.28
 chk_url  |网站url 检查脚本         | 2017.12.26
-process-monitor | 进程监控脚本     | 2017.12.26
-cobbler  |Cobbler无人值守          | 2017.11.28
+process-monitor | 进程监控脚本    | 2017.12.26
+cobbler  |Cobbler无人值守，自动化部署系统 | 2017.11.28
 polling  |轮询巡检脚本          |  2017.10.10
 shells   |常用小脚本集合          |  2017.10.28
 chkhosts |主机ping 检测脚本         | 2017.09.28
@@ -15,7 +16,7 @@ disk     |自动磁盘分区scripts          | 2017.09.28
 ftp      |FTP Upload/Download          | 2017.09.28
 linux-init|linux 最小化安装初始化及服务器SysV Init scripts        | 2017.09.28
 lnmp     |lnmp scripts          |  2017.10.28
-network  |网络配置          |  2017.09.28
+network  |网络配置,centos7 返回eth0 接口名        |  2017.09.28
 redis    |redis 部署脚本          |  2017.09.28
 vpn      |openvpn/pptp scripts          |  2017.9.25|
 #### 使用场景
