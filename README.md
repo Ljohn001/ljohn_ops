@@ -17,7 +17,7 @@ disk     |自动磁盘分区scripts          | 2017.09.28
 ftp      |FTP Upload/Download          | 2017.09.28
 linux-init|linux 最小化安装初始化及服务器SysV Init scripts        | 2017.09.28
 lnmp     |lnmp scripts          |  2017.10.28
-network  |网络配置,centos7 返回eth0 接口名        |  2017.09.28
+network  |网络配置,centos7 返回eth0 接口名，双网卡绑定        |  2018.1.10
 redis    |redis 部署脚本          |  2017.09.28
 vpn      |openvpn/pptp scripts          |  2017.9.25|
 #### 使用场景
