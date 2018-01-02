@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -ne 3 ]; then
+  echo "the number of arguements is wrong."
+  exit 4
+fi
+
+echo '#!/bin/bash' >> $3
+
+if [ $1 == '-a' ]; then
+  echo "# Author: $2" >> $3
+elif [ $1 == '-d' ]; then
+  echo "# Date: $2" >> $3
+elif [ $1 == '-D' ]; then
+  echo "# Description: $2" >> $3
+else 
+  echo "Unknown option, ignore it."
+  rm -f $3
+  exit 5
+fi
+
+vim + $3
+
+if bash -n $3 &> /dev/null; then
+  chmod +x $3
+else
+  echo "Syntax wrong in $3."
+fi
