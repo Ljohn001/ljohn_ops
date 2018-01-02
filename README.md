@@ -108,7 +108,17 @@ https://github.com/teddysun/across/blob/master/bench.sh
 7.简单磁盘IO测试
 ```
 #IO 测试三次，并显示平均值。
-curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/shells/io_test.sh |sh
+#curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/shells/io_test.sh |sh
+```
+
+8.Linux 最小化安装初始化系统
+```
+#CentOS6.x下执行：
+#curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/centos6_init.sh|sh -
+
+#CentOS7.x下执行：
+#curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/centos7_init.sh|sh -
+
 ```
 
 欢迎大家来批评指正，联系方式
