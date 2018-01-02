@@ -8,7 +8,7 @@
 # Version: 1.0
 #===============================
 #
-Date=`date`
+#Date=`date`
 MAIL=`which mail`
 ProcNam=netExtender
 IP=`ip addr| grep eth0 |grep inet |egrep -v "inet6|127.0.0.1" |awk '{print $2}' |awk -F "/" '{print $1}'`
@@ -30,7 +30,7 @@ do
             echo "$ProcNam status is ok" >> /tmp/process_monitor.log
          fi
       else
-            echo "$ProcNam state is failure on $Date,Please check VPN on $IP!!" | $MAIL -s "VPN state Warning"  ljohnmail@foxmail.com
+          echo "$ProcNam state is failure on $(date +%Y-%m-%d-%H-%M-%S),Please check VPN on $IP!!" | $MAIL -s "VPN state Warning"  liujian@erichfund.com
       fi
    fi
    sleep 30
