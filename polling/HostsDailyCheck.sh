@@ -4,7 +4,7 @@
 # Arch: CentOS/RHEL 6/7
 # Author: Ljohn
 # Mail: ljohnmail@foxmail.com
-# Last Update: 2017.10.10
+# Last Update: 2018.02.07
 # Version: 1.1
 ###################################################################
 
@@ -21,7 +21,7 @@ source /etc/profile
 OS_Version=$(awk '{print $(NF-1)}' /etc/redhat-release)
 
 # declare script version date
-Script_Version="2017.10.10"
+Script_Version="2018.02.07"
 
 
 # define polling log path
@@ -667,20 +667,19 @@ function upload_result(){
     echo "############################ FTP Upload #############################"
 
     updir=/var/log/polling
+    upfile=HostDailyCheck-$ipaddr-`hostname`-`date +%Y%m%d`.txt
     todir=/jishu/liujian/polling
     ip=192.168.1.99
     user=ljohn1
     password=ljohn
-    sss=`find $updir -type d -printf $todir/'%P\n'| awk '{if ($0 == "")next;print "mkdir " $0}'`
-    aaa=`find $updir -type f -printf 'put %p %P \n'`
     ftp -nv $ip <<EOF 
     user $user $password
     type binary 
     passive
-    prompt 
-    $sss 
     cd $todir 
-    $aaa 
+    lcd $updir
+    prompt
+    put $upfile
     quit 
 EOF
 }

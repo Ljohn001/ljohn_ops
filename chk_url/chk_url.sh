@@ -46,7 +46,7 @@ main() {
          action "curl $n" /bin/true
       else
          action "curl $n" /bin/false
-           CURL=$(curl_ip $n|egrep "200|302"|wc -l)
+           curl_ip $n
            sleep 10
            if [ $CURL -eq 1 ];then
               action "Retry curl $n again" /bin/true
@@ -60,4 +60,4 @@ main() {
 main
 
 # crontab 添加定时任务5分钟执行一次。
-# */5 * * * * root bash /server/scripts/chk_url.sh &>/dev/null
+# */5 * * * * /bin/bash /server/scripts/chk_url.sh &>/dev/null

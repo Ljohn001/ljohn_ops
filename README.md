@@ -5,12 +5,14 @@
 
 更新内容 |描述| 更新时间
 ---|---|---|
-backup  |文件目录备份 | 2018.1.9
+logrotate | 日志切割       | 2018.02.07
+zabbix  | redis 监控       |2018.02.01
+backup  |文件目录备份，日志备份 | 2018.01.09
 mysql  |mysql备份及重设root用户密码| 2017.12.28
 chk_url  |网站url 检查脚本         | 2017.12.26
-process-monitor | 进程监控脚本    | 2018.1.9
+process-monitor | 进程监控脚本    | 2018.02.01
 cobbler  |Cobbler无人值守，自动化部署系统 | 2017.11.28
-polling  |轮询巡检脚本          |  2017.10.10
+polling  |轮询巡检脚本          |  2018.02.07
 shells   |常用小脚本集合          |  2017.10.28
 chkhosts |主机ping 检测脚本         | 2017.09.28
 disk     |自动磁盘分区scripts          | 2017.09.28

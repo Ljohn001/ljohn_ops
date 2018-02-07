@@ -4,7 +4,7 @@
 # Description:  check url status
 # Author: Ljohn
 # Mail: ljohnmail@foxmail.com
-# Last Update: 2017.12.26
+# Last Update: 2018.01.26
 # Version: 1.0
 #===============================
 #
@@ -15,6 +15,7 @@ array=(
 http://baidu.com
 http://qq.com
 http://taobao.com
+http://192.168.1.233:9015/webfof_login/login
 )
 
 curl_ip() {
@@ -30,7 +31,9 @@ main() {
          action "curl $n" /bin/true
       else
          action "curl $n" /bin/false
-           CURL=$(curl_ip $n|egrep "200|302"|wc -l)
+         sleep 30 #try again after sleep 30 
+          #CURL=$(curl $n|egrep "200|302"|wc -l)
+           curl_ip $n
            if [ $CURL -eq 1 ];then
               action "Retry curl $n again" /bin/true
            else

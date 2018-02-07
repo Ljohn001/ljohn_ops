@@ -1,0 +1,8 @@
+/Data/app/tomcat-7-huanqiu/logs/catalina.out {
+rotate 14
+daily
+copytruncate
+compress
+notifempty
+missingok
+}
