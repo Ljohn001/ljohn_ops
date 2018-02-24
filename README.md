@@ -3,12 +3,12 @@
 集合中包含各种服务的创建，性能测试，日常巡检等；脚本大部分是自己工作中编写使用(经过严格测试)，还包含一些运维大鸟写的脚本修改而来。
 #### 脚本列表
 
-更新内容 |描述| 更新时间
+更新内容 |描述| 最后更新时间
 ---|---|---|
-logrotate | 日志切割       | 2018.02.07
+logrotate | 日志切割,nginx,php等模板,nohup_split 等脚本   | 2018.02.24
 zabbix  | redis 监控       |2018.02.01
 backup  |文件目录备份，日志备份 | 2018.01.09
-mysql  |mysql备份及重设root用户密码| 2017.12.28
+mysql  |mysql备份及重设root用户密码,innobackupex_scripts| 2018.02.24
 chk_url  |网站url 检查脚本         | 2017.12.26
 process-monitor | 进程监控脚本    | 2018.02.01
 cobbler  |Cobbler无人值守，自动化部署系统 | 2017.11.28
