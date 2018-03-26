@@ -5,6 +5,7 @@
 
 更新内容 |描述| 最后更新时间
 ---|---|---|
+win_bash  | win批处理oracle备份脚本       |2018.03.26
 logrotate | 日志切割,nginx,php等模板,nohup_split 等脚本   | 2018.02.24
 zabbix  | redis 监控       |2018.02.01
 backup  |文件目录备份，日志备份 | 2018.01.09
