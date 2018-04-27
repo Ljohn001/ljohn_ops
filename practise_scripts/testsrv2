@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+srv=`basename $0`
+
+lockFile="/var/lock/subsys/$srv"
+
+[ $# -lt 1 ] && echo "Usage: $srv {start|stop|restart|status}" && exit 4
+
+[ $UID -ne 0 ] && echo "Only root." && exit 5
+
+case $1 in
+start)
+   if [ -f $lockFile ]; then
+        echo "$srv is running."
+	exit 7
+   else
+	touch $lockFile
+	[ $? -eq 0 ] && echo "Starting $srv OK."
+   fi
+   ;;
+stop)
+    if [ -f $lockFile ]; then
+	rm -f $lockFile
+	[ $? -eq 0 ] && echo "Stopping $srv OK."
+    else
+	echo "$srv is stopped yes."
+	exit 6
+    fi
+    ;;
+restart)
+    if [ -f $lockFile ];then
+     	rm -f $lockFile
+	[ $? -eq 0 ] && echo "Stopping $srv OK."
+    else
+	echo "$srv is stopped yet."
+    fi
+    touch $lockFile
+    [ $? -eq 0 ] && echo "Starting $srv OK."
+    ;;
+status)
+    if [ -f $lockFile ];then
+	echo "$srv is running."
+    else
+	echo "$srv is stopped."
+    fi
+    ;;
+*)
+    echo "Usage: $srv {start|stop|restart|status}" && exit 9
+esac

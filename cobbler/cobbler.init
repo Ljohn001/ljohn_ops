@@ -1,0 +1,38 @@
+#!/bin/bash
+# chkconfig: 345 80 90
+# description:cobbler
+case $1 in
+  start)
+    /etc/init.d/httpd start
+    /etc/init.d/xinetd start
+    /etc/init.d/dhcpd start
+    /etc/init.d/cobblerd start
+    ;;
+  stop)
+    /etc/init.d/httpd stop
+    /etc/init.d/xinetd stop
+    /etc/init.d/dhcpd stop
+    /etc/init.d/cobblerd stop
+    ;;
+  restart)
+    /etc/init.d/httpd restart
+    /etc/init.d/xinetd restart
+    /etc/init.d/dhcpd restart
+    /etc/init.d/cobblerd restart
+    ;;
+  status)
+    /etc/init.d/httpd status
+    /etc/init.d/xinetd status
+    /etc/init.d/dhcpd status
+    /etc/init.d/cobblerd status
+    ;;
+  sync)
+    cobbler sync
+    ;;
+  *)
+    echo "Input error,please in put 'start|stop|restart|status|sync'!"
+    exit 2
+    ;;
+esac
+# chmod +x /etc/init.d/cobbler
+# chkconfig cobbler on

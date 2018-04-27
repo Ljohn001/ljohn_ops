@@ -1,0 +1,17 @@
+/Data/logs/php/*log {
+    daily
+    rotate 365
+    missingok
+    notifempty
+    compress
+    dateext
+    sharedscripts
+    postrotate
+        if [ -f /Data/app/php5.6.26/var/run/php-fpm.pid ]; then
+            kill -USR1 `cat /Data/app/php5.6.26/var/run/php-fpm.pid`
+        fi
+    endscript
+    postrotate
+        /bin/chmod 644 /Data/logs/php/*gz
+    endscript
+}

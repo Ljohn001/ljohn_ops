@@ -1,0 +1,21 @@
+@echo off
+
+REM # Windows 拷贝批处理脚本
+
+
+
+set CURDATE=%date:~0,4%%date:~5,2%%date:~8,2%
+set destination21=\\172.16.1.21\webbak
+
+
+echo "Copy data to 172.16.2.12" >> bak_clexpdp_data.log
+echo %date:~0,10% %time:~0,2%:%time:~3,2%:%time:~6,2%  >> bak_clexpdp_data.log
+
+xcopy d:\dmpdir\expdp_web_%CURDATE%_*.* %destination21%  /D
+
+echo "Finished copy data !!" >> bak_clexpdp_data.log
+echo %date:~0,10% %time:~0,2%:%time:~3,2%:%time:~6,2%  >> bak_clexpdp_data.log
+
+
+
+

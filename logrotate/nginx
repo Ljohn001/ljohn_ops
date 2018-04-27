@@ -1,0 +1,12 @@
+/var/log/nginx/logs/*.log {
+    daily
+    rotate 365
+    missingok
+    notifempty
+    compress
+    dateext
+    sharedscripts
+    postrotate
+    /etc/init.d/nginx reload
+    endscript
+}
