@@ -46,3 +46,10 @@ enjoy it !
 #远程执行
 curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/centos7_init.sh|sh -
 ```
+
+## 3.ubuntu16.04 init shell
+***使用说明：***
+```
+#远程执行
+curl -sSL https://raw.githubusercontent.com/Ljohn001/ljohn_ops/master/linux-init/ubuntu16.04_init.sh|sh -
+
