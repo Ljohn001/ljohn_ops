@@ -7,7 +7,9 @@ fi
 
 DATADIR=`pwd`/data
 docker run -d \
--p 27017:27017 -v /etc/mongo/mongodb.conf:/etc/mongod.conf.orig \
--v ${DATADIR}/mongodb:/data/db --ulimit nofile=65536 \
 --name mongo \
+-p 27017:27017 \
+-v $PWD/mongodb.conf:/etc/mongod.conf.orig \
+-v ${DATADIR}/mongodb:/data/db \
+--ulimit nofile=65536 \
 dockerrepos.vphotos.cn/vphoto/mongo:v3.2

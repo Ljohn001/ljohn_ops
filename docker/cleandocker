@@ -1,0 +1,5 @@
+0 0 * * * root docker rmi -f $(docker images -q)
+
+0 1 * * * root docker rm -f $(docker ps -a | grep 'Exited' | awk '{print $1}')
+
+0 2 * * * root for i in $(find /var/lib/docker/containers/ -name '*.log' -size +2G);do cat /dev/null > $i;done
