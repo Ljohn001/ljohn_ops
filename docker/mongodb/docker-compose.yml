@@ -1,0 +1,14 @@
+version: '2'
+services:
+  master:
+    image: dockerrepos.vphotos.cn/vphoto/mongo:v3.2
+    volumes:
+      - ${PWD}/data/mongodbml/master:/data/db
+    command: mongod --dbpath /data/db --master
+  slaver:
+    image: dockerrepos.vphotos.cn/vphoto/mongo:v3.2
+    volumes:
+      - ${PWD}/data/mongodbml/slaver:/data/db
+    command: mongod --dbpath /data/db --slave --source master:27017
+    links:
+      - master
