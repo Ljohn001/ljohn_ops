@@ -154,15 +154,18 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
+  annotations:
+    service.beta.kubernetes.io/alicloud-loadbalancer-address-type: intranet
+    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-bp1s5fnv2tgb6phxzmps8
   labels:
     k8s-app: kubernetes-dashboard
   name: kubernetes-dashboard
   namespace: kube-system
 spec:
-  type: NodePort  #暴露一个宿主机端口
+  type: LoadBalancer
   ports:
     - port: 443  #集群内端口,保持不变用443
       targetPort: 8443   #dashbord容器的端口
-      nodePort: 32000
+      protocol: TCP
   selector:
     k8s-app: kubernetes-dashboard
