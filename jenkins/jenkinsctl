@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+jname=$1
+vpenv=${2:-FAT}
+tag=${3:-release/1.45.03}
+idc=${4:-default}
+msVersion=`echo $tag| awk -F '/' '{ptint $2}'`
+instance=${5:-instance0}
+juser="liujian"
+jenkins="ssh -p 8022 10.3.132.54 -l $juser build"
+
+if [ $# -lt 1 ];then
+   echo "parameter is less then 1"
+   exit 1
+fi
+
+if [ `echo $jname | grep -E "vp-b|vp-f"` ];then
+	echo ">>>>>>>>>deploy $jname $tag to $vpenv-$idc<<<<<<<<<"
+	$jenkins $jname -v -s -p vpenv=$vpenv -p tag=$tag -p idc=$idc -p instance=$instance
+else 
+	echo ">>>>>>>>>deploy $jname $tag to $vpenv-$idc<<<<<<<<<"
+        $jenkins $jname -v -s -p vpenv=$vpenv -p tag=$tag -p idc=$idc -p msVersion=$msVersion -p instance=$instance 
+fi

@@ -1,0 +1,50 @@
+[client]
+port            = 3306
+socket          = /var/run/mysqld/mysqld.sock
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+[mysqld]
+server-id	= 1
+user            = mysql
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+bind-address    = 0.0.0.0
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+max_connections = 4096
+max_connect_errors=2000
+table_open_cache=2048
+log_slave_updates = true
+wait_timeout    = 172800 
+lc-messages-dir = /usr/share/mysql
+
+server-id=1
+log_bin		= /var/log/mysql/mysql-bin
+binlog-do-db=vphotos
+binlog_cache_size=2M
+
+read_buffer_size = 16M
+sort_buffer_size = 8M
+slow_query_log = 1
+long_query_time = 5
+slow_query_log_file = /var/log/mysql/slow.log
+max_allowed_packet      = 16M
+thread_stack            = 192K
+thread_cache_size       = 8
+query_cache_limit       = 1M
+query_cache_size        = 16M
+log_error = /var/log/mysql/error.log
+expire_logs_days        = 10
+max_binlog_size         = 100M
+slave-skip-errors       = 1449
+innodb_buffer_pool_size = 8G
+innodb_buffer_pool_chunk_size = 256M
+innodb_log_buffer_size = 4M
+innodb_log_file_size = 32M
+max_allowed_packet      = 16M
+tmp_table_size = 1024M
+sql_mode      = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+skip-name-resolve

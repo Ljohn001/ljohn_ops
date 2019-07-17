@@ -2,6 +2,7 @@
 pid-file        = /var/run/mysqld/mysqld.pid
 socket          = /var/run/mysqld/mysqld.sock
 datadir         = /var/lib/mysql
+server-id=1
 # setting binlog
 log-bin=/var/lib/mysql/mysql-bin
 #server-id=1234
