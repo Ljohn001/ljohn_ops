@@ -1,0 +1,39 @@
+version: '2'
+services:
+  mysqlmaster:
+    image: dockerrepos.vphotos.cn/vphoto/mysql:v5.7
+    ulimits:
+      nproc: 65535
+    mem_limit: 1024m
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=vphotos"
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./data/mysql-master:/var/lib/mysql/
+      - ./config/mysql-master:/etc/mysql/conf.d/
+  mysqlslave:
+    image: dockerrepos.vphotos.cn/vphoto/mysql:v5.7
+    ulimits:
+      nproc: 65535
+    mem_limit: 1024m
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=vphotos"
+    ports:
+      - "4001:3306"
+    volumes:
+      - ./data/mysql-slave:/var/lib/mysql/
+      - ./config/mysql-slave:/etc/mysql/conf.d/
+  mysqlconfigure:
+    image: dockerrepos.vphotos.cn/vphoto/mysql:v5.7
+    environment:
+      - "MYSQL_SLAVE_PASSWORD=vphotos"
+      - "MYSQL_MASTER_PASSWORD=vphotos"
+      - "MYSQL_ROOT_PASSWORD=vphotos"
+      - "MYSQL_REPLICATION_USER=repl"
+      - "MYSQL_REPLICATION_PASSWORD=repl"
+    volumes:
+      - ./mysql_connector.sh:/tmp/mysql_connector.sh
+    command: /bin/bash -x /tmp/mysql_connector.sh

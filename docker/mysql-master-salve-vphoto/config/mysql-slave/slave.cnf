@@ -1,0 +1,62 @@
+[client]
+port            = 3306
+socket          = /var/run/mysqld/mysqld.sock
+default-character-set=utf8
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+[mysqld]
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr/local/mysql
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+bind-address            = 0.0.0.0
+max_allowed_packet      = 16M
+thread_stack            = 192K
+thread_cache_size       = 8
+max_connections        = 1000
+query_cache_limit       = 1M
+query_cache_size        = 16M
+
+#log-slow-queries=/var/log/mysql/log-slow-queries.log
+slow_query_log = 1
+long_query_time = 5
+slow_query_log_file = /var/log/mysql/slow.log
+table_open_cache	= 4096
+tmp_table_size = 2048M
+
+# setting binlog
+server-id=101
+log-bin=/var/lib/mysql/s1-bin
+sync_binlog=1
+replicate-do-db=vphotos
+binlog_format = row
+
+log_error = /var/log/mysql/error.log
+expire_logs_days        = 10
+max_binlog_size         = 100M
+innodb_buffer_pool_size = 1G
+innodb_buffer_pool_chunk_size = 256M
+innodb_log_buffer_size = 4M
+innodb_log_file_size = 32M
+#sql_mode=''
+sql_mode      = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+# 字符集
+character-set-server=utf8
+collation-server=utf8_general_ci
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet      = 16M
+[mysql]
+[isamchk]
+key_buffer              = 16M
+default-character-set=utf8
+#!includedir /etc/mysql/conf.d/
