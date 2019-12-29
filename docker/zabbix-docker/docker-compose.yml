@@ -1,0 +1,52 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone='+08:00'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "MysqlPasswd"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+    ports:
+      - 9306:3306
+    volumes:
+      - /data/dockerdata/db/data:/var/lib/mysql
+      - /data/dockerdata/db/conf:/etc/mysql/conf.d
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
+  server:
+    image: zabbix/zabbix-server-mysql:centos-4.0.3
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: MysqlPasswd
+      ZBX_TIMEOUT: 30
+    ports:
+      - 9051:10051
+      - 8444:10051
+    volumes:
+      - /data/dockerdata/server/alertscripts:/usr/lib/zabbix/alertscripts
+      - /data/dockerdata/server/externalscripts:/usr/lib/zabbix/externalscripts
+      - /data/dockerdata/server/modules:/var/lib/zabbix/modules
+      - /data/dockerdata/server/enc:/var/lib/zabbix/enc
+      - /data/dockerdata/server/ssh_keys:/var/lib/zabbix/ssh_keys
+      - /data/dockerdata/server/ssl/certs:/var/lib/zabbix/ssl/certs
+      - /data/dockerdata/server/ssl/keys:/var/lib/zabbix/ssl/keys
+      - /data/dockerdata/server/ssl/ssl_ca:/var/lib/zabbix/ssl/ssl_ca
+      - /data/dockerdata/server/snmptraps:/var/lib/zabbix/snmptraps
+      - /data/dockerdata/server/mibs:/var/lib/zabbix/mibs
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
+  web:
+    image: zabbix/zabbix-web-nginx-mysql:centos-4.0.3
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: MysqlPasswd
+      ZBX_SERVER_HOST: server
+      PHP_TZ: "Asia/Shanghai"
+      ZBX_SERVER_NAME: aws
+    ports:
+      - 8081:80
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime

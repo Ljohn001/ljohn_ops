@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+ssh -i /root/.ssh/id_dsa $RSBACKUP_HOST "umount /mnt/backup"
+du -sh $RSBACKUP_STORE/$RSBACKUP_HOST/$RSBACKUP_VOLUME/$(date +%Y-%m-%d) >> /var/www/html/backup.txt

@@ -37,7 +37,7 @@ if ! mkdir -p $BACKUPS_DIR; then
 fi;
 # Create dump
 cd $BACKUPS_DIRS
-mongodump -d $MONGO_DATABASE --username $DBUSERNAME --password $DBPASSWORD --authenticationDatabase $DBAUTHDB
+/opt/mongodb/bin/mongodump -d $MONGO_DATABASE --username $DBUSERNAME --password $DBPASSWORD --authenticationDatabase $DBAUTHDB
 # Rename dump directory to backup name
 mv dump $BACKUP_NAME
 # Compress backup

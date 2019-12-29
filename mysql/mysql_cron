@@ -1,0 +1,5 @@
+/etc/cron.d/mysql-backup
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root
+0 */3 * * * root /root/mysql-interface-backup.sh
+0 0 * * * root /root/mysql-all-backup.sh

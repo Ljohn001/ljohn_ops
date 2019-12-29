@@ -1,0 +1,25 @@
+#!/bin/bash
+# by ljohn
+# time 2019.12.29
+read f
+echo $f|grep -q -i "host.*volume"
+if [ $? -eq 0 ];then
+	td=$(echo $f|sed 's/<[^>]*>/ /g')
+	host=$(echo $td|awk '{print $1}')
+	volume=$(echo $td|awk '{print $2}')
+	dt=$(echo $td|awk '{print $3}')
+	r=$(cat /var/www/html/backup.txt|grep $host|grep $volume |grep $dt|awk '{print $1}')
+	if [ "X$r" != "X" ];then
+		echo $r |grep -q "4.0K"
+		if [ $? -ne 0 ];then
+			echo "<td bgcolor=\"#e0ffe0\">$r</td>"
+		else
+			echo "<td bgcolor=\"#e9c6b1\">$r</td>"
+		fi
+	else
+		echo "<td bgcolor=\"#e9c6b1\">nodata</td>"
+	fi
+
+else
+	echo "wrong"
+fi
