@@ -12,7 +12,7 @@ backupdir=/tmp/backup/${HIP}
 cd /; sudo tar -cvzf ${backupdir}/etc.tgz etc var/spool/cron/crontabs usr/local/{bin,sbin}
 
 # 备份重要个人文件
-sudo tar -ignore-failed-read -zcvp -f ${backupdir}/backup-$(date '+%Y-%m-%d_%H_%M_%S').tgz  \
+sudo tar --ignore-failed-read -zcvp -f ${backupdir}/backup-$(date '+%Y-%m-%d_%H_%M_%S').tgz  \
         --exclude=/root/.cache \
         --exclude=/root/.gradle \
         --exclude=/root/.m2 \
