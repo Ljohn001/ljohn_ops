@@ -3,8 +3,9 @@
 # by ljohn
 # time 2020.3.19
 
-backupdir=/backup
-[ ! -d $backupdir ] && mkdir -p $backupdir
+backupdir=/backup/`hostname`
+sudo chown -R ljohn.ljohn $backupdir
+[ ! -d $backupdir ] && sudo mkdir -p $backupdir
 
 # 备份deb包名称列表
 ( zcat /var/log/apt/history.log*.gz | grep Commandline: ;  zcat /var/log/apt/history.log*.gz | grep Commandline: ) > ${backupdir}/deb.list.txt
