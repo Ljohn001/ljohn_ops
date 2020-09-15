@@ -8,7 +8,7 @@
 # Version: 1.0
 #===============================
 start=`date +%s`
-HLIST=$(cat /server/scripts/ipadds.txt)
+HLIST=$(cat ./ipadds.txt)
 uphosts=0
 downhosts=0
 for IP in $HLIST
