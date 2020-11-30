@@ -28,6 +28,8 @@ cp -r /etc/yum.repos.d /etc/yum.repos.d.backup && rm -rf /etc/yum.repos.d/*
 if [[ $OS_Version > 6 &&  $OS_Version < 7 ]];then
     [ -d /etc/yum.repos.d/ ] && cd /etc/yum.repos.d/
     curl -O http://mirrors.aliyun.com/repo/Centos-6.repo &> /dev/null  && curl -O http://mirrors.aliyun.com/repo/epel-6.repo &> /dev/null
+    # 删除系统版本的支持
+    sed -i 's#$releasever#6#'Centos-6.repo
     rpm --import  https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-6 
     yum clean all &> /dev/null  && echo "CentOS6 yum repo is installed"
 elif [[ $OS_Version > 7 ]];then
