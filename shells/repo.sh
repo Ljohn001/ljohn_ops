@@ -15,7 +15,8 @@ if  [ $(id -u) -gt 0 ]; then
 fi
 platform=`uname -i`
 osversion=`cat /etc/redhat-release | awk '{print $1}'`
-if [[ $platform != "x86_64" ||  $osversion != "CentOS" ]];then
+#if [[ $platform != "x86_64" ||  $osversion != "CentOS" ]];then
+if [[ $platform != "x86_64" ]];then
     echo "Error this script is only for 64bit and CentOS/5/6/7 Operating System !"
     exit 1
 fi
