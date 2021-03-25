@@ -1,0 +1,60 @@
+global:
+  imagePullSecrets:
+  - name: regcred
+
+prometheusOperator:
+  image:
+    repository: your-registry.com/monitoring/prometheus-operator
+    tag: v0.38.1
+  tlsProxy:
+    image:
+      repository: your-registry.com/monitoring/ghostunnel
+      tag: v1.5.2
+  prometheusConfigReloaderImage:
+    repository: your-registry.com/monitoring/prometheus-config-reloader
+    tag: v0.38.1
+  configmapReloadImage:
+    repository: your-registry.com/monitoring/configmap-reload
+    tag: v0.3.0
+  admissionWebhooks:
+     patch:
+       image:
+         repository: your-registry.com/monitoring/kube-webhook-certgen
+         tag: v1.2.0
+
+alertmanager:
+  alertmanagerSpec:
+    image:
+      repository: your-registry.com/monitoring/alertmanager
+      tag: v0.20.0
+
+prometheus:
+  prometheusSpec:
+    image:
+      repository: your-registry.com/monitoring/prometheus
+      tag: v2.17.2
+
+kube-state-metrics:
+  serviceAccount:
+    imagePullSecrets:
+    - name: regcred
+  image:
+    repository: your-registry.com/monitoring/kube-state-metrics
+    tag: v1.9.5
+
+grafana:
+  image:
+    pullSecrets:
+    - regcred
+    repository: your-registry.com/monitoring/grafana
+    tag: 6.6.0
+  sidecar:
+    image: your-registry.com/monitoring/k8s-sidecar:0.1.99
+
+prometheus-node-exporter:
+  serviceAccount:
+    imagePullSecrets:
+    - name: regcred
+  image:
+    repository: your-registry.com/monitoring/node-exporter
+    tag: v0.18.1

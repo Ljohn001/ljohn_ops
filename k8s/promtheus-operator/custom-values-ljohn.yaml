@@ -1,0 +1,37 @@
+# Define prometheus
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30090
+
+# Define grafana
+grafana:
+  # Set password for Grafana admin user
+  adminPassword: ztosadmin123!@#
+  service:
+    type: NodePort
+    nodePort: 30091
+
+# Define Alertmanager 
+alertmanager:
+  service:
+    type: NodePort
+    nodePort: 30092
+
+# Change default node-exporter port
+prometheus-node-exporter:
+  service:
+    port: 39100
+    targetPort: 39100
+
+# Disable Etcd metrics
+kubeEtcd:
+  enabled: false
+
+# Disable Controller metrics
+kubeControllerManager:
+  enabled: false
+
+# Disable Scheduler metrics
+kubeScheduler:
+  enabled: false

@@ -1,0 +1,60 @@
+# Define persistent storage for Prometheus (PVC)
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30090
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          storageClassName: do-block-storage
+          resources:
+            requests:
+              storage: 20Gi
+
+# Define persistent storage for Grafana (PVC)
+grafana:
+  # Set password for Grafana admin user
+  adminPassword: ztosadmin123!@#
+  service:
+    type: NodePort
+    nodePort: 30091
+  persistence:
+    enabled: true
+    storageClassName: do-block-storage
+    accessModes: ["ReadWriteOnce"]
+    size: 20Gi
+
+# Define persistent storage for Alertmanager (PVC)
+alertmanager:
+  service:
+    type: NodePort
+    nodePort: 30092
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          storageClassName: do-block-storage
+          resources:
+            requests:
+              storage: 20Gi
+
+# Change default node-exporter port
+prometheus-node-exporter:
+  service:
+    port: 39100
+    targetPort: 39100
+
+# Disable Etcd metrics
+kubeEtcd:
+  enabled: false
+
+# Disable Controller metrics
+kubeControllerManager:
+  enabled: false
+
+# Disable Scheduler metrics
+kubeScheduler:
+  enabled: false

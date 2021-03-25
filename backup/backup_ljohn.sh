@@ -2,18 +2,27 @@
 #
 # by ljohn
 # time 2020.3.19
+set -e
 
-backupdir=/backup/`hostname`
-sudo chown -R ljohn.ljohn $backupdir
-[ ! -d $backupdir ] && sudo mkdir -p $backupdir
+mtime=$(date '+%Y%m%d')
+#backupdir=/backup/`hostname`
+
+# the mobile hard disk exists
+dstpath="/media/ljohn/Elements SE/backup-ljohn"
+[ ! -d "$backupdir" ] && echo "disk is not exist" ;exit 1
+
+# create backup dir 
+backupdir="$dstpath/$mtime"
+[ ! -d "$backupdir" ] && sudo mkdir -p "$backupdir"
+sudo chown -R ljohn.ljohn "$backupdir"
 
 # 备份deb包名称列表
-( zcat /var/log/apt/history.log*.gz | grep Commandline: ;  zcat /var/log/apt/history.log*.gz | grep Commandline: ) > ${backupdir}/deb.list.txt
+( zcat /var/log/apt/history.log*.gz | grep Commandline: ;  zcat /var/log/apt/history.log*.gz | grep Commandline: ) > "$backupdir"/deb.list.txt
 # 备份配置文件
-cd /; sudo tar -cvzf ${backupdir}/etc.tgz etc var/spool/cron/crontabs usr/local/{bin,sbin}
+cd /; sudo tar -cvzf "$backupdir"/etc.tgz etc var/spool/cron/crontabs usr/local/{bin,sbin}
 
 # 备份重要个人文件
-sudo tar -zcvp -f ${backupdir}/backup-$(date '+%Y-%m-%d_%H_%M_%S').tgz  \
+sudo tar -zcvp -f "$backupdir"/backup-$(date '+%Y-%m-%d_%H_%M_%S').tgz  \
         --exclude=/home/ljohn/.cache \
         --exclude=/home/ljohn/.gradle \
         --exclude=/home/ljohn/.m2 \
